@@ -12,6 +12,8 @@ class BloxorzSuite extends munit.FunSuite:
     import Move.*
     def solve(ls: List[Move]): Block =
       ls.foldLeft(startBlock) { case (block, move) =>
+        println(s"$block, ${block.isLegal}")
+        println(move)
         require(block.isLegal) // The solution must always lead to legal blocks
         move match
           case Left => block.left
@@ -54,6 +56,11 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(startPos, Pos(1, 1))
   }
 
+  test("find end level 1") {
+    new Level1:
+      assertEquals(goal, Pos(4, 7))
+  }
+
 
   test("optimal solution for level 1 (5pts)") {
     new Level1:
@@ -64,6 +71,8 @@ class BloxorzSuite extends munit.FunSuite:
   test("optimal solution length for level 1 (5pts)") {
     new Level1:
       assertEquals(solution.length, optsolution.length)
+      println(solution)
+      println(pathsToGoal(0))
   }
 
 
