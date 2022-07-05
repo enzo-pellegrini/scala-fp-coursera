@@ -13,6 +13,11 @@ class HuffmanSuite extends munit.FunSuite:
     )
   }
 
+  test("times") {
+    new TestTrees:
+      print(times("ciaaoo".toList))
+  }
+
   test("weight of a larger tree (10pts)") {
     new TestTrees:
       assertEquals(weight(t1), 5)

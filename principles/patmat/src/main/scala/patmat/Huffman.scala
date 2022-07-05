@@ -73,13 +73,7 @@ trait Huffman extends HuffmanInterface:
    *   }
    */
   def times(chars: List[Char]): List[(Char, Int)] =
-    def iter(chars: List[Char], acc: Map[Char, Int]): Map[Char, Int] =
-      chars match {
-        case Nil => acc
-        case h::t => acc.updatedWith(h)((count: Option[Int]) => Option(count.getOrElse(0) + 1))
-      }
-    val map = Map[Char, Int]()
-    iter(chars, map).toList
+    chars.foldLeft(Map[Char, Int]().withDefaultValue(0))((acc, x) => acc + (x -> (acc(x) + 1))).toList
 
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
