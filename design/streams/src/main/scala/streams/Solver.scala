@@ -27,7 +27,7 @@ trait Solver extends GameDef:
    * that are inside the terrain.
    */
   def neighborsWithHistory(b: Block, history: List[Move]): LazyList[(Block, List[Move])] =
-    b.legalNeighbors.map((block, move) => (block, move :: history)).to(LazyList)
+    b.legalNeighbors.map((block, move) => (block, history.appended(move))).to(LazyList)
 
   /**
    * This function returns the list of neighbors without the block
@@ -68,7 +68,6 @@ trait Solver extends GameDef:
             val updatedExplored = explored.concat(neighbors.map((block, history) => block))
             
             neighbors #::: from(neighbors, updatedExplored)
-            // neighbors.concat(from(neighbors, updatedExplored))
 
   /**
    * The lazy list of all paths that begin at the starting block.
